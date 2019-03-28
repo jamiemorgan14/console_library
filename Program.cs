@@ -1,4 +1,5 @@
 ﻿using System;
+using console_library.Models;
 
 namespace console_library
 {
@@ -7,6 +8,10 @@ namespace console_library
     static void Main(string[] args)
     {
       Console.WriteLine("Hello Worlds!");
+
+      Book whereTheSidewalkEnds = new Book("Where the Sidewalk Ends", "Shel Silverstein");
+
     }
+
   }
 }
