@@ -1,5 +1,6 @@
 ﻿using System;
 using console_library.Models;
+using System.Collections.Generic;
 
 namespace console_library
 {
@@ -7,13 +8,25 @@ namespace console_library
   {
     static void Main(string[] args)
     {
-      Console.WriteLine("Hello Worlds!");
+      Library myLibrary = new Library("New York City", "St. Johns");
 
       Book whereTheSidewalkEnds = new Book("Where the Sidewalk Ends", "Shel Silverstein");
-      Library stJohns = new Library("New York City", "St. John's");
-      System.Console.WriteLine(whereTheSidewalkEnds.Title);
-      System.Console.WriteLine(stJohns.Name);
-    }
+      Book wool = new Book("Wool", "Hugh Howey");
+      Book HPSS = new Book("Harry Potter and the Sorcerer's Stone", "J.K. Rowling");
+      Book EII = new Book("Everything is Illuminated", "Jonathan Safran Foer");
+      Book DIWC = new Book("Devil in the White City", "Erik Larson");
 
+      myLibrary.addBook(whereTheSidewalkEnds);
+      myLibrary.addBook(wool);
+      myLibrary.addBook(HPSS);
+      myLibrary.addBook(EII);
+      myLibrary.addBook(DIWC);
+
+
+
+      myLibrary.PrintBooks();
+      string input = Console.ReadLine();
+      myLibrary.Checkout(input);
+    }
   }
 }
