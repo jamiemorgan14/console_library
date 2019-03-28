@@ -8,6 +8,7 @@ namespace console_library
   {
     static void Main(string[] args)
     {
+
       Library myLibrary = new Library("New York City", "St. Johns");
 
       Book whereTheSidewalkEnds = new Book("Where the Sidewalk Ends", "Shel Silverstein");
@@ -22,11 +23,54 @@ namespace console_library
       myLibrary.addBook(EII);
       myLibrary.addBook(DIWC);
 
+      System.Console.WriteLine("Welcome to the Library");
+      Enum activeMenu = Menus.CheckoutBook;
+      bool inLibrary = true;
+
+      while (inLibrary)
+      {
+        switch (activeMenu)
+        {
+          case Menus.CheckoutBook:
+            myLibrary.PrintBooks();
+            break;
+          case Menus.ReturnBook:
+            myLibrary.PrintCheckedOut();
+            break;
+        }
+        string input = Console.ReadLine();
 
 
-      myLibrary.PrintBooks();
-      string input = Console.ReadLine();
-      myLibrary.Checkout(input);
+        switch (input.ToUpper()[0])
+        {
+          case 'Q':
+            inLibrary = false;
+            break;
+          case 'R':
+            activeMenu = Menus.ReturnBook;
+            break;
+          case 'A':
+            activeMenu = Menus.CheckoutBook;
+            break;
+          default:
+            if (activeMenu.Equals(Menus.CheckoutBook))
+            {
+              myLibrary.Checkout(input);
+            }
+            else
+            {
+              myLibrary.Return(input);
+            }
+            break;
+        }
+      }
+      System.Console.WriteLine("Goodbye!");
+    }
+
+    public enum Menus
+    {
+      CheckoutBook,
+      ReturnBook
     }
   }
 }

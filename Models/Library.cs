@@ -28,20 +28,57 @@ Select a book number to check out (Q)uit or (R)eturn a book");
 
     }
 
+    public void PrintCheckedOut()
+    {
+      Console.Clear();
+      System.Console.WriteLine(@"Please choose from the following options
+      ");
+      System.Console.WriteLine(@"Returnable Books: 
+      ");
+
+      for (int i = 0; i < CheckedOut.Count; i++)
+      {
+        Book currentBook = CheckedOut[i];
+        Console.WriteLine($"{i + 1}) {CheckedOut[i].Title} - {CheckedOut[i].Author}");
+      }
+      System.Console.WriteLine(@"
+Select a book number to Return (Q)uit or see (A)vailable books");
+
+    }
+
     public void Checkout(string input)
     {
-      Book selectedBook = ValidateBook(input);
+      Book selectedBook = ValidateBook(input, Books);
       if (selectedBook == null)
       {
         Console.Clear();
-        System.Console.WriteLine("Invalid Selection");
+        System.Console.WriteLine("Invalid Selection... Press enter to continue");
+        Console.ReadLine();
         return;
       }
+      //set available to false, add book to checked out and remove from available array
       selectedBook.Available = false;
       CheckedOut.Add(selectedBook);
       Books.Remove(selectedBook);
       Console.Clear();
-      System.Console.WriteLine("SUCCESSFUL!");
+      System.Console.WriteLine($"Enjoy {selectedBook.Title}");
+    }
+    public void Return(string input)
+    {
+      Book selectedBook = ValidateBook(input, CheckedOut);
+      if (selectedBook == null)
+      {
+        Console.Clear();
+        System.Console.WriteLine("Invalid Selection... Press enter to continue");
+        Console.ReadLine();
+        return;
+      }
+      //set available to false, add book to checked out and remove from available array
+      selectedBook.Available = true;
+      Books.Add(selectedBook);
+      CheckedOut.Remove(selectedBook);
+      Console.Clear();
+      System.Console.WriteLine($"Thanks for returning {selectedBook.Title}!");
     }
 
     internal void addBook(Book book)
@@ -49,13 +86,13 @@ Select a book number to check out (Q)uit or (R)eturn a book");
       Books.Add(book);
     }
 
-    private Book ValidateBook(string input)
+    private Book ValidateBook(string input, List<Book> booksList)
     {
       // is a number
       int bookIndex;
-      if (Int32.TryParse(input, out bookIndex) && bookIndex > 0 && bookIndex < Books.Count)
+      if (Int32.TryParse(input, out bookIndex) && bookIndex > 0 && bookIndex <= booksList.Count)
       {
-        return Books[bookIndex - 1];
+        return booksList[bookIndex - 1];
       }
       return null;
     }
