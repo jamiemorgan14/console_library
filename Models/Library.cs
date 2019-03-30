@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 namespace console_library.Models
 {
@@ -95,6 +96,13 @@ Select a book number to Return (Q)uit or see (A)vailable books");
         return booksList[bookIndex - 1];
       }
       return null;
+    }
+
+    public void LastBook()
+    {
+      System.Console.WriteLine(Books.Last().Title);
+      System.Console.WriteLine("Here is the last book. Press enter to continue");
+      Console.ReadLine();
     }
 
     public Library(string location, string name)

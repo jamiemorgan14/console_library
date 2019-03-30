@@ -52,6 +52,9 @@ namespace console_library
           case 'A':
             activeMenu = Menus.CheckoutBook;
             break;
+          case 'L':
+            myLibrary.LastBook();
+            break;
           default:
             if (activeMenu.Equals(Menus.CheckoutBook))
             {
