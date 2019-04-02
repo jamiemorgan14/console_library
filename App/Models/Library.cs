@@ -11,6 +11,9 @@ namespace console_library.Models
     private List<Book> Books { get; set; }
     private List<Book> CheckedOut { get; set; }
 
+    private List<Electronic> Electronics { get; set; }
+    private List<Electronic> CheckedOutElectronics { get; set; }
+
     public void PrintBooks()
     {
       Console.Clear();
@@ -25,7 +28,7 @@ namespace console_library.Models
         Console.WriteLine($"{i + 1}) {Books[i].Title} - {Books[i].Author}");
       }
       System.Console.WriteLine(@"
-Select a book number to check out (Q)uit or (R)eturn a book");
+Select a book number to check out, (R)eturn a book, view (E)lectronics, or (Q)uit");
 
     }
 
