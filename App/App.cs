@@ -21,6 +21,8 @@ namespace console_library
       myLibrary.addBook(HPSS);
       myLibrary.addBook(EII);
       myLibrary.addBook(DIWC);
+      myLibrary.AddLaptop(mbp);
+      myLibrary.AddLaptop(dell);
 
 
       System.Console.WriteLine("Welcome to the Library");
@@ -32,10 +34,16 @@ namespace console_library
         switch (activeMenu)
         {
           case Menus.CheckoutBook:
-            myLibrary.PrintBooks();
+            myLibrary.PrintAvailableBooks();
             break;
           case Menus.ReturnBook:
-            myLibrary.PrintCheckedOut();
+            myLibrary.PrintCheckedOutBooks();
+            break;
+          case Menus.CheckoutElectronics:
+            myLibrary.PrintAvailableElectronics();
+            break;
+          case Menus.ReturnElectronics:
+            myLibrary.PrintCheckedOutElectronics();
             break;
         }
         string input = Console.ReadLine();
@@ -52,14 +60,28 @@ namespace console_library
           case 'A':
             activeMenu = Menus.CheckoutBook;
             break;
+          case 'E':
+            activeMenu = Menus.CheckoutElectronics;
+            break;
+          case 'L':
+            activeMenu = Menus.ReturnElectronics;
+            break;
           default:
             if (activeMenu.Equals(Menus.CheckoutBook))
             {
-              myLibrary.Checkout(input);
+              myLibrary.CheckoutBook(input);
+            }
+            else if (activeMenu.Equals(Menus.ReturnBook))
+            {
+              myLibrary.ReturnBook(input);
+            }
+            else if (activeMenu.Equals(Menus.CheckoutElectronics))
+            {
+              myLibrary.CheckoutElectronics(input);
             }
             else
             {
-              myLibrary.Return(input);
+              myLibrary.ReturnElectronics(input);
             }
             break;
         }
